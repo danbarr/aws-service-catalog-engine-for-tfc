@@ -44,7 +44,7 @@ module "terraform_cloud_reference_engine" {
   token_rotation_interval_in_days  = var.token_rotation_interval_in_days
   terraform_version                = var.terraform_version
 }
-
+/*
 # Creates an AWS Service Catalog Portfolio to house the example product
 resource "aws_servicecatalog_portfolio" "portfolio" {
   name          = "TFC Example Portfolio"
@@ -69,3 +69,4 @@ module "example_product" {
   tfc_provider_arn = module.terraform_cloud_reference_engine.oidc_provider_arn
 
 }
+*/
