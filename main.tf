@@ -71,7 +71,7 @@ module "example_product" {
 }
 
 module "example_product_sagemaker" {
-  source = "./engine/example-product-sagemaker"
+  source = "./example-product-sagemaker"
 
   # ARNs of Lambda functions that need to be able to assume the IAM Launch Role
   parameter_parser_role_arn  = module.terraform_cloud_reference_engine.parameter_parser_role_arn
