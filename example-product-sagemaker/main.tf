@@ -55,7 +55,7 @@ locals {
 }
 
 resource "aws_servicecatalog_tag_option_resource_association" "example_tags" {
-  for_each = toset(var.servicecatalog_tag_option_ids)
+  for_each = {for i, val in var.servicecatalog_tag_option_ids: i => val}
 
   resource_id   = aws_servicecatalog_product.example.id
   tag_option_id = each.value
