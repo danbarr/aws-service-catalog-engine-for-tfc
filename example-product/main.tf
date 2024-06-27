@@ -54,14 +54,11 @@ locals {
   class_case_product_name                        = local._product_name_convert_kebab_case_to_class_case
 }
 
-resource "aws_servicecatalog_tag_option_resource_association" "example_product_managed_by" {
-  resource_id   = aws_servicecatalog_product.example.id
-  tag_option_id = aws_servicecatalog_tag_option.product_managed_by.id
-}
+resource "aws_servicecatalog_tag_option_resource_association" "example_tags" {
+  for_each = toset(var.servicecatalog_tag_option_ids)
 
-resource "aws_servicecatalog_tag_option" "product_managed_by" {
-  key   = "ManagedBy"
-  value = "tfc"
+  resource_id   = aws_servicecatalog_product.example.id
+  tag_option_id = each.value
 }
 
 resource "aws_servicecatalog_tag_option_resource_association" "example_product_name" {
