@@ -52,6 +52,11 @@ resource "aws_servicecatalog_portfolio" "portfolio" {
   provider_name = "HashiCorp Examples"
 }
 
+resource "aws_servicecatalog_tag_option" "product_managed_by" {
+  key   = "ManagedBy"
+  value = "tfc"
+}
+
 # An example product
 module "example_product" {
   source = "./example-product"
@@ -68,6 +73,7 @@ module "example_product" {
   tfc_organization = module.terraform_cloud_reference_engine.tfc_organization
   tfc_provider_arn = module.terraform_cloud_reference_engine.oidc_provider_arn
 
+  servicecatalog_tag_option_ids = [aws_servicecatalog_tag_option.product_managed_by.id]
 }
 
 module "example_product_sagemaker" {
@@ -84,4 +90,6 @@ module "example_product_sagemaker" {
   tfc_hostname     = module.terraform_cloud_reference_engine.tfc_hostname
   tfc_organization = module.terraform_cloud_reference_engine.tfc_organization
   tfc_provider_arn = module.terraform_cloud_reference_engine.oidc_provider_arn
+
+  servicecatalog_tag_option_ids = [aws_servicecatalog_tag_option.product_managed_by.id]
 }
